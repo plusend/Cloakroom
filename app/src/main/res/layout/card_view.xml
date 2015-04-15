@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:layout_margin="5dp"
     android:orientation="horizontal"
-    card_view:cardBackgroundColor="@color/cardview_dark_background"
+    card_view:cardBackgroundColor="@color/cardview_light_background"
     card_view:cardCornerRadius="5dp" >
 
     <RelativeLayout
@@ -14,9 +14,10 @@
 
         <ImageView
             android:id="@+id/pic"
-            android:layout_width="match_parent"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
-            android:layout_centerInParent="true"
+            android:layout_marginLeft="10dp"
+            android:gravity="left"
             android:scaleType="centerCrop" />
 
         <TextView
@@ -27,7 +28,7 @@
             android:layout_marginBottom="10dp"
             android:layout_marginRight="10dp"
             android:gravity="right|bottom"
-            android:textColor="@android:color/white"
+            android:textColor="@android:color/black"
             android:textSize="24sp" />
     </RelativeLayout>
 
