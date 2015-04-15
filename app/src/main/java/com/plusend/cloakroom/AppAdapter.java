@@ -22,10 +22,7 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.card_view, viewGroup, false);
-        // set the view's size, margins, paddings and layout parameters
-
-        ViewHolder vh = new ViewHolder((TextView)v.findViewById(R.id.name));
-        return vh;
+        return new ViewHolder(v);
     }
 
     @Override
@@ -40,9 +37,9 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.ViewHolder> {
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView mTextView;
-        public ViewHolder(TextView v) {
+        public ViewHolder(View v) {
             super(v);
-            mTextView = v;
+            mTextView = (TextView)v.findViewById(R.id.name);
         }
     }
 }
