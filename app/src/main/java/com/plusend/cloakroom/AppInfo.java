@@ -12,6 +12,15 @@ public class AppInfo {
     private Drawable appIcon;  //应用程序图像
     private Intent intent;     //启动应用程序的Intent ，一般是Action为Main和Category为Lancher的Activity
     private String pkgName;    //应用程序所对应的包名
+    private String size;
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
 
     public AppInfo() {
     }

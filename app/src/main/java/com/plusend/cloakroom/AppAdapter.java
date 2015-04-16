@@ -30,6 +30,7 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         viewHolder.mImageView.setImageDrawable(appInfoList.get(position).getAppIcon());
         viewHolder.mTextView.setText(appInfoList.get(position).getAppLabel());
+        viewHolder.size.setText(appInfoList.get(position).getSize() == null ? "": appInfoList.get(position).getSize());
     }
 
     @Override
@@ -40,10 +41,12 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.ViewHolder> {
     public static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView mTextView;
         public ImageView mImageView;
+        public TextView size;
         public ViewHolder(View v) {
             super(v);
             mImageView = (ImageView)v.findViewById(R.id.pic);
             mTextView = (TextView)v.findViewById(R.id.name);
+            size = (TextView)v.findViewById(R.id.size);
         }
     }
 }
