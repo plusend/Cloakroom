@@ -1,16 +1,20 @@
 package com.plusend.cloakroom;
 
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.Formatter;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -28,7 +32,7 @@ import java.util.List;
 public class AppListFragment extends Fragment {
 
     private RecyclerView mRecyclerView;
-    private RecyclerView.Adapter mAdapter;
+    private AppAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private List<AppInfo> mListAppInfo;
     private List<PackageInfo> mListPackageInfo;
@@ -57,9 +61,12 @@ public class AppListFragment extends Fragment {
         for(PackageInfo packageInfo : mListPackageInfo){
             if((packageInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) == 0){
             AppInfo appInfo = new AppInfo();
+                appInfo.setPkgName(packageInfo.packageName);
+                Log.d("Aaron", packageInfo.packageName + "");
             appInfo.setAppIcon(packageInfo.applicationInfo.loadIcon(pm));
             appInfo.setAppLabel(packageInfo.applicationInfo.loadLabel(pm).toString());
             String path = packageInfo.applicationInfo.sourceDir;
+            appInfo.setPath(path);
             try {
                 appInfo.setSize(formateFileSize(new FileInputStream(new File(path)).available()));
             } catch (IOException e) {
@@ -82,6 +89,21 @@ public class AppListFragment extends Fragment {
 
         mAdapter = new AppAdapter(mListAppInfo);
         mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(new AppAdapter.OnItemClickListener(){
+
+            @Override
+            public void onItemClickListener(View view, int position) {
+
+              //  Toast.makeText(,"Hello", Toast.LENGTH_SHORT).show();
+                Log.d("Aaron", "position" + position);
+                Uri uri = Uri.parse("package:"+ mListAppInfo.get(position).getPkgName());
+                Log.d("Aaron", "Uri: " + uri.toString());
+                Intent intent = new Intent(Intent.ACTION_DELETE, uri);
+                startActivity(intent);
+            }
+        });
+
         return rootView;
     }
 

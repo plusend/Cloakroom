@@ -13,6 +13,25 @@ public class AppInfo {
     private Intent intent;     //启动应用程序的Intent ，一般是Action为Main和Category为Lancher的Activity
     private String pkgName;    //应用程序所对应的包名
     private String size;
+    private String path;
+
+    public String getPath() {
+        return path;
+    }
+
+    public void setPath(String path) {
+        this.path = path;
+    }
+
+    private String backup;
+
+    public String getBackup() {
+        return backup;
+    }
+
+    public void setBackup(String backup) {
+        this.backup = backup;
+    }
 
     public String getSize() {
         return size;

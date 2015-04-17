@@ -16,6 +16,25 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.ViewHolder> {
 
     private List<AppInfo> appInfoList;
 
+    /**
+     * Item的回调接口
+     *
+     */
+    public interface OnItemClickListener {
+        void onItemClickListener(View view, int position);
+    }
+
+    private OnItemClickListener listener; // 点击Item的回调对象
+
+    /**
+     * 设置回调监听
+     *
+     * @param listener
+     */
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
+    }
+
     public AppAdapter(List<AppInfo> list){
         appInfoList = list;
     }
@@ -23,14 +42,25 @@ public class AppAdapter extends RecyclerView.Adapter<AppAdapter.ViewHolder> {
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.card_view, viewGroup, false);
+        v.setTag(appInfoList.get(i).getPkgName());
         return new ViewHolder(v);
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder viewHolder, int position) {
+    public void onBindViewHolder(ViewHolder viewHolder, final int position) {
         viewHolder.mImageView.setImageDrawable(appInfoList.get(position).getAppIcon());
         viewHolder.mTextView.setText(appInfoList.get(position).getAppLabel());
         viewHolder.size.setText(appInfoList.get(position).getSize() == null ? "": appInfoList.get(position).getSize());
+
+        if (listener != null) {
+            viewHolder.size.setOnClickListener(new View.OnClickListener() {
+
+                @Override
+                public void onClick(View v) {
+                    listener.onItemClickListener(v, position);
+                }
+            });
+        }
     }
 
     @Override
