@@ -15,7 +15,11 @@ import android.view.ViewGroup;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.text.Collator;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -63,6 +67,18 @@ public class AppListFragment extends Fragment {
             }
             mListAppInfo.add(appInfo);}
         }
+
+        Collections.sort(mListAppInfo, new Comparator<AppInfo>() {
+            @Override
+            public int compare(AppInfo aa, AppInfo ab) {
+                CharSequence  sa = aa.getAppLabel();
+                //if (sa == null) sa = aa.name;
+                CharSequence  sb = ab.getAppLabel();
+                //if (sb == null) sb = ab.name;
+                return sCollator.compare(sa.toString(), sb.toString());
+            }
+            private final Collator   sCollator = Collator.getInstance();
+        });
 
         mAdapter = new AppAdapter(mListAppInfo);
         mRecyclerView.setAdapter(mAdapter);

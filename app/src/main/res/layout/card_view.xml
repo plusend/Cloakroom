@@ -18,6 +18,7 @@
             android:id="@+id/pic"
             android:layout_width="60dp"
             android:layout_height="match_parent"
+            android:layout_marginLeft="6dp"
             android:gravity="left"
             android:scaleType="centerCrop" />
 
@@ -27,7 +28,7 @@
             android:layout_gravity="left"
             android:gravity="center_vertical"
             android:singleLine="true"
-            android:layout_marginLeft="6dp"
+            android:layout_marginLeft="12dp"
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="match_parent"
