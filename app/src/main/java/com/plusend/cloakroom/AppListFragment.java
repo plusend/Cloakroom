@@ -1,5 +1,6 @@
 package com.plusend.cloakroom;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
@@ -14,14 +15,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.text.Collator;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -36,11 +35,13 @@ public class AppListFragment extends Fragment {
     private RecyclerView.LayoutManager mLayoutManager;
     private List<AppInfo> mListAppInfo;
     private List<PackageInfo> mListPackageInfo;
+    private Context context;
 
     private PackageManager pm;
 
-    public AppListFragment() {
+    public AppListFragment(Context context) {
         super();
+        this.context=context;
     }
 
     @Override
@@ -95,7 +96,7 @@ public class AppListFragment extends Fragment {
             @Override
             public void onItemClickListener(View view, int position) {
 
-              //  Toast.makeText(,"Hello", Toast.LENGTH_SHORT).show();
+                FileIO.copy(context,mListAppInfo.get(position).getPath(),mListAppInfo.get(position).getPkgName());
                 Log.d("Aaron", "position" + position);
                 Uri uri = Uri.parse("package:"+ mListAppInfo.get(position).getPkgName());
                 Log.d("Aaron", "Uri: " + uri.toString());
