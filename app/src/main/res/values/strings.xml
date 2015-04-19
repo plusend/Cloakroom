@@ -3,6 +3,8 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="about">About</string>
+    <string name="installed">Installed</string>
+    <string name="cloak">Cloak</string>
     <string name="about_body"><![CDATA[
         Cloakroom for Android application, develop by <a href="https://github.com/plusend/Cloakroom.git">plusend</a>.
     ]]></string>
