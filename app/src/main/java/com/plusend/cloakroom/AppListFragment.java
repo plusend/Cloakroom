@@ -88,7 +88,7 @@ public class AppListFragment extends Fragment {
             private final Collator   sCollator = Collator.getInstance();
         });
 
-        mAdapter = new AppAdapter(mListAppInfo);
+        mAdapter = new AppAdapter(mListAppInfo,"寄存");
         mRecyclerView.setAdapter(mAdapter);
 
         mAdapter.setOnItemClickListener(new AppAdapter.OnItemClickListener(){
@@ -96,7 +96,12 @@ public class AppListFragment extends Fragment {
             @Override
             public void onItemClickListener(View view, int position) {
 
+                Log.d("Aaron", "view: " + view.toString());
+                AppAdapter.ViewHolder viewHolder = (AppAdapter.ViewHolder)view.getTag();
+                viewHolder.deposit.setVisibility(View.INVISIBLE);
+               // view.findViewById(R.id.progressBarCircularIndeterminate).setVisibility(View.VISIBLE);
                 FileIO.copy(context,mListAppInfo.get(position).getPath(),mListAppInfo.get(position).getPkgName());
+                view.setEnabled(false);
                 Log.d("Aaron", "position" + position);
                 Uri uri = Uri.parse("package:"+ mListAppInfo.get(position).getPkgName());
                 Log.d("Aaron", "Uri: " + uri.toString());

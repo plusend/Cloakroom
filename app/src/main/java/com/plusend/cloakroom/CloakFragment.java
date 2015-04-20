@@ -90,7 +90,7 @@ public class CloakFragment extends Fragment {
             private final Collator   sCollator = Collator.getInstance();
         });
 
-        mAdapter = new AppAdapter(mListAppInfo);
+        mAdapter = new AppAdapter(mListAppInfo,"领取");
         mRecyclerView.setAdapter(mAdapter);
 
         mAdapter.setOnItemClickListener(new AppAdapter.OnItemClickListener(){
